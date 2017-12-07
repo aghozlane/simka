@@ -154,6 +154,7 @@ private:
     string _outputDir;
     size_t _partitionId;
     ofstream _outputPartitionFile;
+    ofstream test;
     
 #ifdef CHI2_TEST
 
@@ -181,6 +182,8 @@ public:
     	_partitionId = partitionId;
     	string outputFilename = _outputDir + "/select_kmers_out_" + Stringify::format("%i", _partitionId) + ".txt";
     	_outputPartitionFile.open(outputFilename.c_str());
+    	string outputFilename2 = _outputDir + "/arf_" + Stringify::format("%i", _partitionId) + ".txt";
+    	test.open(outputFilename2.c_str());
 
         // We configure the vector for the N.(N+1)/2 possible pairs
         //_countTotal.resize (_nbBanks*(_nbBanks+1)/2);
@@ -227,6 +230,7 @@ public:
         }
         
         _outputPartitionFile.close();
+        test.close();
         //        for(size_t i=0; i<nbValues; i++){
         //            double val = ch2_to_minimisers_abundances.top().first;
         //            CountVector counts = ch2_to_minimisers_abundances.top().second;
@@ -270,6 +274,44 @@ public:
             _stats->_nbKmersPerBank[i] += abundance;
             _totalAbundance += abundance;
         }
+#endif 
+#ifdef CHI2_TEST
+        cout << kmer.toString(_kmerSize) << endl;
+        string outLine = kmer.toString(_kmerSize);
+        for(size_t i=0; i<counts.size(); i++){
+        	cout << counts[i] << " ";
+        	CountNumber count = counts[i];
+        	string countStr = Stringify::format("%i", count);
+        	outLine += "\t" + countStr;
+        }
+        outLine += "\n";
+        test.write(outLine.c_str(), outLine.size());
+        cout << endl;
+        //cout << "ICIICICICI\n" << endl;
+        /*string outputFilename = _outputDir + "/arf_" + Stringify::format("%i", _partitionId) + ".txt";
+    	test.open(outputFilename.c_str());
+    	cout << "F" << "\n" << endl;
+    	for (auto kv : stored_minimisers_to_xi2_and_counts){
+            auto value = kv.second;
+            cout << "uhhh" << "\n" << endl;     
+	        string outLine =  Stringify::format("%f",value.first);      // print the (xi2)
+	        outLine += "\n";
+	        outLine += Stringify::format("%d",kv.first);                // print key (the minimiser)
+	        CountVector& counts = value.second;                         // get the count vector and print it.        
+	        cout << counts.size() << "\n" << endl;
+	        outLine += "\n";
+	        for(size_t i=0; i<counts.size(); i++){
+	            CountNumber count = counts[i];
+	            string countStr = Stringify::format("%i", count);
+	            cout << count << "\n" << endl;
+	            outLine += countStr + "\n";
+	        }
+	        outLine += "\n";
+        	test.write(outLine.c_str(), outLine.size());
+        }
+        test.close()*/
+        
+        return;
 #endif
         
         /* A DEPLACER PENDANT LE COMPTAGE DES KMERS
@@ -309,7 +351,7 @@ public:
         
         
         
-        return;
+        
         
 #endif // CHI2_TEST
         /*

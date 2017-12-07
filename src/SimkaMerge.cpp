@@ -1207,7 +1207,7 @@ public:
 			    	bestIt = pq.top()._it; pq.pop();
 				}
 
-		    	//cout << bestIt->value().toString(31) << " " << bestIt->getBankId() <<  " "<< bestIt->abundance() << endl;
+		    	//cout << bestIt->value().toString(31) << " hhh " << bestIt->getBankId() <<  " "<< bestIt->abundance() << endl;
 
 				if (bestIt->value() != previous_kmer )
 				{
