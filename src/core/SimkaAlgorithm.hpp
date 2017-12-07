@@ -208,7 +208,7 @@ public:
         //        size_t nbValues = ch2_to_minimisers_abundances.size();
         //        std::unordered_map<u_int64_t, std::pair< float, CountVector>>::iterator it;
         
-        //        std::map< float, minimizer_Abundances>::iterator it; // std::map< float, minimizer_Abundances, ch2_to_minimisers_abundancesFunction>
+        //        std::mcounap< float, minimizer_Abundances>::iterator it; // std::map< float, minimizer_Abundances, ch2_to_minimisers_abundancesFunction>
         //        for (it = stored_minimisers_xi2.begin(); it!=stored_minimisers_xi2.end(); ++it){
         for (auto kv : stored_minimisers_to_xi2_and_counts){
                         auto value = kv.second;                         // value is a couple xi2,vector count.
@@ -276,7 +276,7 @@ public:
         }
 #endif 
 #ifdef CHI2_TEST
-        cout << kmer.toString(_kmerSize) << endl;
+        //cout << kmer.toString(_kmerSize) << endl;
         string outLine = kmer.toString(_kmerSize);
         for(size_t i=0; i<counts.size(); i++){
         	cout << counts[i] << " ";
